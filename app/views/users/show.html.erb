@@ -1,0 +1,39 @@
+<div class="d-flex container-fluid justify-content-end w-100 flex-row">
+    <div class="row gx-2 flex-row flex-grow-1" style="height: 100%;">
+        <div class="col-md-4 d-flex align-items-center">
+            <div class="d-flex card align-items-center" style="width: auto; max-width: 22rem; min-height: 250px; max-height: 500px;">
+                <% if @user.avatar.attached? %>
+                    <%= image_tag current_user.avatar, style:"height: 50%; max-width:100%;" %>
+                <% else %>
+                    <%= image_tag "avatar.png", class:"card-img-top", style:"height: 50%; width: 50%;" %>
+                <% end %>
+                <div class="d-flex flex-column card-body text-center w-100">
+                    <h3 class="card-title text-center"><%= @user.email %></h3>
+                    <p class="card-text"><%= @user.hashtag %></p>
+                    <div class="d-flex align-items-end justify-content-end flex-fill">
+                        <%= link_to "Edit", edit_user_registration_path, class: "btn btn-primary", style: "max-height:40px;" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 d-flex" style="margin-top: 1rem;">
+            <div class="d-flex w-100 flex-column" style="overflow-y: auto; max-height: 725px; min-width: 70%">
+                <% @posts.each do |post| %>
+                    <% if post.user_id == current_user.id %>
+                        <div class="card mx-2 mb-2">
+                            <div class="card-header"><strong>Author:</strong> <%= post.user_hashtag %> (<%= localize(post.created_at, :format => :short) %>)</div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= post.title %></h5>
+                                <p class="card-text"><%= post.description %></p>
+                                <%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary" %>
+                                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        
+    </div>
+</div>

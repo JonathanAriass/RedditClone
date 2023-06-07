@@ -1,0 +1,35 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field form-group mt-2">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "User Email" %>
+  </div>
+
+  <div class="field form-group mt-2">
+    <%= f.text_field :hashtag, autofocus: true, autocomplete: "hashtag", class: "form-control", placeholder: "User Hashtag" %>
+  </div>
+
+  <div class="field form-group mt-2">
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Password (6 characters minimum)" %>
+  </div>
+
+  <div class="field form-group mt-2">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password" %>
+  </div>
+
+  <label class="btn btn-default btn-change-avatar mt-2" style="border-color: #2196F3; color: dodgerblue;">
+    Upload new image
+    <span style="display:none;">
+      <%= f.file_field :avatar, id: "fileUploader"%>
+    </span>
+  </label>
+
+  <div class="actions">
+    <%= f.submit "Sign up", class: "btn btn-primary mt-2" %>
+  </div>
+
+
+<% end %>
+

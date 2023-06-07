@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">Reddit</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
+            <%= link_to current_user do %>
+                <% if current_user.avatar.attached? %>
+                    <%= image_tag current_user.avatar, class: "rounded-circle", style: "width: 50px; height: 50px;" %>
+                <% else %>
+                    <%= image_tag "avatar.png", class: "rounded-circle", style: "width: 50px; height: 50px;" %>
+                <% end %>
+            <% end %>
+
+            <li class="nav-item active">
+                <%= link_to "Posts", posts_path, class:"nav-link" %>
+            </li>
+
+            <li class="nav-item">
+                <%= link_to "Add Post", new_post_path, class:"nav-link" %>
+            </li>
+
+            <li class="nav-item">
+                <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+            </li>
+
+            <li class="nav-item">
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class:"nav-link" %>
+            </li>
+
+        <% else %>
+            <li class="nav-item">
+                <%= link_to "Sing Up", new_user_registration_path, class:"nav-link" %>
+            </li>
+
+            <li class="nav-item">
+                <%= link_to "Sign In", new_user_session_path, class:"nav-link" %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
